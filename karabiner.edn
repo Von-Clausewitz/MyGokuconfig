@@ -1,0 +1,298 @@
+{:profiles {:Technic {:default true
+                      :sim 50
+                      :delay 350
+                      :alone 200
+                      :held 200}}
+ :simlayers {:period-mode {:key :period}
+             :e-mode {:key :e}
+             :i-mode {:key :i}}
+ :applications {:browser [;; these strings are regex to match applications bundle_identifiers
+                            ;; you can find bundle_identifiers in the Info.plist file of an applications
+                            ;; eg. in /Applications/Mail.app/Contents/Info.plist
+                            ;; search for "CFBundleIdentifier"
+                            ;; you can also find bundle_identifiers using command line:
+                            ;; osascript -e 'id of app "Google Chrome"'
+                          "^org\\.mozilla\\.firefox$"
+                          "^org\\.mozilla\\.firefoxdeveloperedition$"
+                          "^com\\.brave\\.Browser$"
+                          "^org\\.chromium\\.Chromium$"
+                          "^com\\.google\\.Chrome$"
+                          "^com\\.google\\.Chrome\\.canary$"
+                          "^com\\.apple\\.Safari$"
+                          "com.colliderli.iina"]
+                :chrome ["^org\\.chromium\\.Chromium$"
+                         "^com\\.google\\.Chrome$"
+                         "^com\\.google\\.Chrome\\.canary$"]
+                :safari ["^com\\.apple\\.Safari$"]
+                :vs ["^com\\.microsoft\\.VSCode$"]
+                :hrm ["^com\\.hrm"]}
+ :devices {:apple [{:vendor_id 1452 :product_id 641}]}
+ :main [{:des "Chrome scroll"
+         :rules [;[:down_arrow :j :chrome]
+                 ;[:up_arrow :k :chrome]
+                 ;[:left_arrow :h :chrome]
+                 ;[:right_arrow :l :chrome]
+                 ]}
+        {:des "Tap-Mode"
+         ;:rules [[:##a :left_control nil {:alone :a}] [:##s :left_option nil {:alone :s}] [:##d :left_shift nil {:alone :d}] [:##f :left_command nil {:alone :f}] [:##semicolon :right_control nil {:alone :semicolon}] [:##l :right_option nil {:alone :l}] [:##k :right_shift nil {:alone :k}] [:##j :right_command nil {:alone :j}]]
+         }
+        {:des "Multiouchc select-mode"
+         :rules [:select-mode
+                 [:q [:escape ["select-mode" 0]] ["multitouch_extension_finger_count_total" 1]]
+                 ;IJKL UOH:
+                 [:i :!Sup_arrow ["multitouch_extension_finger_count_total" 1]] [:j :!Sleft_arrow ["multitouch_extension_finger_count_total" 1]] [:k :!Sdown_arrow ["multitouch_extension_finger_count_total" 1]] [:l :!Sright_arrow ["multitouch_extension_finger_count_total" 1]]
+                 [:u :!OSleft_arrow ["multitouch_extension_finger_count_total" 1]] [:o :!OSright_arrow ["multitouch_extension_finger_count_total" 1]] [:h :!CSleft_arrow ["multitouch_extension_finger_count_total" 1]] [:semicolon :!SCright_arrow ["multitouch_extension_finger_count_total" 1]]
+                 ;SXCVD
+                 [:a [:!Te :!STa] ["multitouch_extension_finger_count_total" 1]] [:s [:!Ta :!STe] ["multitouch_extension_finger_count_total" 1]]
+                 [:x [:!Cx ["select-mode" 0] :escape] ["multitouch_extension_finger_count_total" 1]] [:c [:!Cc ["select-mode" 0] :escape] ["multitouch_extension_finger_count_total" 1]]]}
+        {:des "Multitouch"
+         :rules [;[:a :fn ["multitouch_extension_finger_count_total" 1]] 
+                 [:right_command :fn ["multitouch_extension_finger_count_total" 1]]
+                 ;
+                 [:##i :up_arrow ["multitouch_extension_finger_count_total" 1]]
+                 [:##k :down_arrow ["multitouch_extension_finger_count_total" 1]]
+                 [:##j :left_arrow ["multitouch_extension_finger_count_total" 1]]
+                 [:##l :right_arrow ["multitouch_extension_finger_count_total" 1]]
+                 [:##u :!Oleft_arrow ["multitouch_extension_finger_count_total" 1]]
+                 [:##o :!Oright_arrow ["multitouch_extension_finger_count_total" 1]]
+                 [:##i :page_up ["multitouch_extension_finger_count_total" 2]]
+                 [:##k :page_down ["multitouch_extension_finger_count_total" 2]]
+                 [:##j :!Cup_arrow ["multitouch_extension_finger_count_total" 2]]
+                 [:##l :!Cdown_arrow ["multitouch_extension_finger_count_total" 2]]
+                 [:##u :!Oleft_arrow ["multitouch_extension_finger_count_total" 2]]
+                 [:##o :!Oright_arrow ["multitouch_extension_finger_count_total" 2]]
+                 ;[[:i :a] :page_up] [[:k :a] :page_down] [[:j :a] :!Cup_arrow] [[:l :a] :!Cdown_arrow] [[:u :a] :!Oleft_arrow] [[:o :a] :!Oright_arrow]
+                 ;YPH;
+                 [:##h :!Cleft_arrow ["multitouch_extension_finger_count_total" 1]]
+                 [:##semicolon :!Cright_arrow ["multitouch_extension_finger_count_total" 1]]
+                 [:y :!Ty ["multitouch_extension_finger_count_total" 1]] [:p :!Ty ["multitouch_extension_finger_count_total" 1]]
+                 ;DFERSGW
+                 ;[:d [["delete-mode" 1] ["command-mode" 0]] nil {:held [:!Cz :!Cright_arrow :!CSleft_arrow :delete_or_backspace :vk_none]}]
+                 [:d :delete_or_backspace ["multitouch_extension_finger_count_total" 1]]
+                 [:f :delete_forward ["multitouch_extension_finger_count_total" 1]]
+                 [:e :!Odelete_or_backspace ["multitouch_extension_finger_count_total" 1]]
+                 [:r :!Odelete_forward ["multitouch_extension_finger_count_total" 1]]
+                 [:s :!Cdelete_or_backspace ["multitouch_extension_finger_count_total" 1]]
+                 [:g :!Tk ["multitouch_extension_finger_count_total" 1]]
+                 ;[:w [:!Cright_arrow :!Cdelete_or_backspace]]
+                 [:w [:!Ta :!Tk] ["multitouch_extension_finger_count_total" 1]]
+                 ;NZXCVP
+                 [:n :!Freturn_or_enter ["multitouch_extension_finger_count_total" 1]] [:m :!To ["multitouch_extension_finger_count_total" 1]]
+                 [:period [:!Cf :!Cg] ["multitouch_extension_finger_count_total" 1]] [:comma [:!Cf :!CSg] ["multitouch_extension_finger_count_total" 1]] [:q :escape ["multitouch_extension_finger_count_total" 1]]
+                 [:#Sz :!Cz ["multitouch_extension_finger_count_total" 1]]
+                 ;[:x :!Cx nil {:held [:!Ta :!STe :!Cx :right_arrow :vk_none]} ]
+                 ;[:c :!Cc nil {:held [:!Ta :!STe :!Cc :right_arrow :vk_none]} ]
+                 [:x :!Cx ["multitouch_extension_finger_count_total" 1]]
+                 [:x [:!Ta :!STe :!Cx] ["multitouch_extension_finger_count_total" 2]]
+                 [:c :!Cc ["multitouch_extension_finger_count_total" 1]]
+                 [:c [:!Ta :!STe :!Cc] ["multitouch_extension_finger_count_total" 2]]
+                 [:v :!Cv ["multitouch_extension_finger_count_total" 1]]
+                 [:v [:!Cv :!Freturn_or_enter] ["multitouch_extension_finger_count_total" 2]]
+                 ;67890[]
+                 [:6 :!Ca ["multitouch_extension_finger_count_total" 1]] [:7 [:!Ta :!TSe] ["multitouch_extension_finger_count_total" 1]] [:8 [:!Cleft_arrow :!SCright_arrow] ["multitouch_extension_finger_count_total" 1]]
+                 [:9 :!OSleft_arrow ["multitouch_extension_finger_count_total" 1]] [:0 :!OSright_arrow ["multitouch_extension_finger_count_total" 1]]
+                 [:open_bracket :!Sleft_arrow ["multitouch_extension_finger_count_total" 1]] [:close_bracket :!Sright_arrow ["multitouch_extension_finger_count_total" 1]]
+                 ;[:6 :!Ca] [:7 [:!Ta :!TSe]] [:8 [:!Cleft_arrow :!SCright_arrow]] 
+                 ;[:9 :!OSleft_arrow] [:0 :!OSright_arrow
+                 ;[:t [:!OEs ["select-mode" 0]] ["multitouch_extension_finger_count_total" 1]]
+                 [:t [:!OEs ["select-mode" 1]] ["multitouch_extension_finger_count_total" 1]]
+                 [:#Ohyphen :!Chyphen ["multitouch_extension_finger_count_total" 1]] [:#Oequal_sign :!Cequal_sign ["multitouch_extension_finger_count_total" 1]]]}
+        {:des "Better ⌘XCFG"
+         :rules [[:!Cx :!Cx nil {:held [:!Ta :!STe :!Cx :right_arrow :vk_none]}]
+                 [:!Cc :!Cc nil {:held [:!Ta :!STe :!Cc :right_arrow :vk_none]}]
+                 [:!Qx :!Qx nil {:held [:!Ta :!STe :!Cx :right_arrow :vk_none]}]
+                 [:!Qc :!Qc nil {:held [:!Ta :!STe :!Cc :right_arrow :vk_none]}]
+                 [:!Cf [:!Cf :!Cg]] [:!Cg [:!Cf :!CSg]]]}
+        {:des "Single tap left shift to change input"
+         :rules [[:left_shift :left_shift nil {:alone :!TSspacebar}]
+                 ;[:left_shift :left_shift nil {:alone :!COTe}]
+                 ;[:right_shift :right_shift nil {:alone :!COTp}]
+                 ]}
+        {:des "Fn Enhance"
+         :rules [[:f1 :display_brightness_decrement] [:f2 :display_brightness_increment]
+                 [:f3 :mission_control] [:f4 :f4] [:f6 [:f6 :down_arrow :down_arrow]]
+                 [:f7 :rewind] [:f8 :play_or_pause] [:f9 :fastforward] [:f10 :mute] [:f11 :volume_decrement] [:f12 :volume_increment]
+                 [:!Of1 :!SOdisplay_brightness_decrement] [:!Of2 :!SOdisplay_brightness_increment] [:!Qf11 :!SOvolume_decrement] [:!Qf12 :!SOvolume_increment]
+                 [:f13 :!Cdelete_or_backspace]]}
+        ;{:des "Hold tab to control + option using rectangle for windows management or tab if alone"
+         ;:rules [[:##tab [:!Oleft_control] nil {:alone :tab}]]}
+        {:des "Double Command to Control + Option + Shift"
+         :rules [[:!Cright_command :!OSleft_control]
+                 [:!Qleft_command :!OSleft_control]]}
+        {:des "Mode"
+         :rules [[:!Cright_option :!Cright_option];;
+                 :symbols-layer
+                 [:right_option :!Cright_option]
+                 [:left_command :!OSleft_control]
+                 [:spacebar [["command-mode" 1] :fn] nil {:afterup ["command-mode" 0] :alone :spacebar}]]}
+        {:des "Command-mode"
+         :rules [[:#Sright_command ["command-mode" 1] nil {:afterup ["command-mode" 0] :alone :spacebar}]
+                 [:f20 ["command-mode" 1] nil {:afterup ["command-mode" 0] :alone :button2}]
+                 ;[:##Sspacebar ["command-mode" 1] nil {:afterup ["command-mode" 0] :alone :spacebar}]
+                 ;[:left_command :left_command nil  {:alone [:escape]}]
+                 ;[:left_command :left_command nil {:alone [:!OEc ["command-mode" 1]]}]
+                 [:right_option :right_command nil {:alone [:!CTf]}]
+                 ;[:left_option :left_option nil {:alone ["command-mode" 0]}]·
+
+                 [:slash :slash]
+                 :command-mode
+                 ;[:spacebar ["command-mode" 0] nil {:afterup ["command-mode" 1]} :alone :spacebar]
+                 ;A
+                 [:a :!Ta] [:right_command :fn]
+                 ;IJKLUO
+                 [:##i :up_arrow] [:##k :down_arrow] [:##j :left_arrow] [:##l :right_arrow] [:##u :!Oleft_arrow] [:##o :!Oright_arrow]
+                 [:!Fi :page_up] [:!Fk :page_down] [:!Fj :!Cup_arrow] [:!Fl :!Cdown_arrow] [:!Fu :!Oleft_arrow] [:!Fo :!Oright_arrow]
+                 [[:i :a] :page_up] [[:k :a] :page_down] [[:j :a] :!Cup_arrow] [[:l :a] :!Cdown_arrow] [[:u :a] :!Oleft_arrow] [[:o :a] :!Oright_arrow]
+                 ;YPH;
+                 [:##h :!Cleft_arrow nil {:held [:!Fleft_arrow :vk_none]}] [:##semicolon :!Cright_arrow nil {:held [:!Fright_arrow :vk_none]}]
+                 [:y :!Ty] [:p :!Ty]
+                 ;DFERSGW
+                 ;[:d [["delete-mode" 1] ["command-mode" 0]] nil {:held [:!Cz :!Cright_arrow :!CSleft_arrow :delete_or_backspace :vk_none]}]
+                 [:d :delete_or_backspace] [:f :delete_forward]
+                 [:e :!Odelete_or_backspace] [:r :!Odelete_forward]
+                 [:s :!Cdelete_or_backspace] [:g :!Tk] 
+                 ;[:w [:!Cright_arrow :!Cdelete_or_backspace]]
+                 [:w [:!Ta :!Tk]]
+                 [:a :left_shift nil {:alone [:!Cdelete_or_backspace]}]
+                 ;NZXCVP
+                 [:n :!Freturn_or_enter] [:m :!To]
+                 [:t [:!OEs ["select-mode" 1] ["command-mode" 0]]]
+                 [:period [:!Cf :!Cg]] [:comma [:!Cf :!CSg]] [:q :escape]
+                 [:#Sz :!Cz] [:x :!Cx nil {:held [:!Ta :!STe :!Cx :right_arrow :vk_none]}] [:c :!Cc nil {:held [:!Ta :!STe :!Cc :right_arrow :vk_none]}] [:v :!Cv]
+                 ;67890-=[]
+                 [:6 :!Ca] [:7 [:!Ta :!TSe]] [:8 [:!Cleft_arrow :!SCright_arrow]] [:9 :!OSleft_arrow] [:0 :!OSright_arrow]
+                 [:open_bracket :!Sleft_arrow] [:close_bracket :!Sright_arrow]
+                 ;[:6 :!Ca] [:7 [:!Ta :!TSe]] [:8 [:!Cleft_arrow :!SCright_arrow]] [:9 :!OSleft_arrow] [:0 :!OSright_arrow]
+                 [[:hyphen :equal_sign] :!C0]
+                 [:#Ohyphen :!Chyphen] [:#Oequal_sign :!Cequal_sign]]}
+        {:des "Command-mode-EI"
+         :rules [:e-mode
+                 [:i :up_arrow] [:k :down_arrow] [:j :left_arrow] [:l :right_arrow] [:u :!Oleft_arrow] [:o :!Oright_arrow] [:h :!Cleft_arrow] [:semicolon :!Cright_arrow] [:m :return_or_enter] [:n :!Freturn_or_enter] [:return_or_enter :!To] [:y :!Ty] [:p :!Ty] [:period [:!Cf :!Cg]] [:comma [:!Cf :!CSg]]
+                 :i-mode
+                 [:d :delete_or_backspace] [:f :delete_forward]
+                 [:e :!Odelete_or_backspace] [:r :!Odelete_forward]
+                 [:s :!Cdelete_or_backspace] [:g :!Tk] [:w [:!Ta :!Tk]]
+                 [:a :!Cdelete_or_backspace][:q :escape]]}
+        {:des "Symbols-layer"
+         :rules [[:!Qright_command :!Oright_command] ;double command ?
+                 [:spacebar [["symbols-layer" 1]] nil {:afterup ["symbols-layer" 0] :alone [:spacebar]}]
+                 ;[:q [["symbols-layer-" 1]] nil {:afterup ["symbols-layer-" 0] :alone [:q]}]
+                 ;[:p [["symbols-layer-2" 1]] nil {:afterup ["symbols-layer-2" 0] :alone [:p]}]
+
+                 :symbols-layer
+                 ;DFER => []{} AS =>\/ QWTG =>…_^*
+                 [:d :open_bracket] [:f :close_bracket] [:e :!Sopen_bracket] [:r :!Sclose_bracket] [:a :backslash] [:s :slash] [:t :!S6] [:g :!S8] [:w :!Shyphen] [:q :!Osemicolon]
+                 ;JKUI
+                 [:j :!S9] [:k :!S0] [:u :!Scomma] [:i :!Speriod] [:y :!S1] [:h :!Sslash] [:o :equal_sign] [:p :!S7] [:l :hyphen]
+                 [:z :!S3] [:x :!S4] [:c :!Sbackslash] [:v :!Sgrave_accent_and_tilde] [:b :grave_accent_and_tilde] [:n :!Sequal_sign] [:m :!S5] [:comma :!Squote] [:period :quote] [:slash :!S2] [:semicolon :semicolon]
+                 [:right_option :!Cright_option]]}
+        {:des "Select-mode"
+         :rules [:select-mode
+                 [:q [:escape ["select-mode" 0]]]
+                 ;IJKL UOH:
+                 [:i :!Sup_arrow] [:j :!Sleft_arrow] [:k :!Sdown_arrow] [:l :!Sright_arrow]
+                 [:u :!OSleft_arrow] [:o :!OSright_arrow] [:h :!CSleft_arrow] [:semicolon :!SCright_arrow]
+                 ;SXCVD
+                 [:a [:!Te :!STa]] [:s [:!Ta :!STe]] [:x [:!Cx ["select-mode" 0] :escape]] [:c [:!Cc ["select-mode" 0] :escape]]]}
+        {:des "Hold caps_lock to Hyper or ESC"
+         :rules [;[:##caps_lock :!QWEright_shift nil {:alone :escape}]
+                 ;[:##return_or_enter :!QWEright_shift nil {:alone :return_or_enter}]
+                 [:!Fcaps_lock :caps_lock]
+                 [:##return_or_enter :vk_none nil {:alone :return_or_enter :held :!QWEright_shift :params {:held 20}}]
+                 [:#COSTcaps_lock :vk_none nil {:alone :escape :held :!QWEright_shift :params {:held 20}}]]}
+        ;{:des "Caps_lock and return to App S"
+         ;:rules [[:caps_lock ["hyper-mode" 1] nil {:afterup ["hyper-mode" 0] :alone :##caps_lock}]
+                 ;[:return_or_enter ["hyper-mode" 1] nil {:afterup ["hyper-mode" 0] :alone :return_or_enter}]
+                 ;:hyper-mode
+                 ;[:a "open -a /Applications/Activity.app的替身"]
+                 ;[:b "open -a bettertouchtool"]
+                 ;[:c "open: Activity Monitor"]]}
+        {:des "swap ; : and ' '' "
+         :rules [;[:semicolon :!Ssemicolon] [:!Ssemicolon :semicolon] [:!Rsemicolon :semicolon]
+                 ;[:quote :!Squote] [:!Squote :quote] [:!Rquote :quote]
+                 ]}
+        {:des "heldi test"
+         :rules [[:!SOa :vk_none nil {:held [:b :vk_none] :alone [:c]}]
+                 [:!SOd :!S9 ["command-mode" 1]]
+                 [:!SOb "say 'hello world'"]]}
+        {:des "period mode"
+         :rules [[:d :!S9 :period-mode] ;; .d insert (
+                 [:f :!S0 :period-mode] ;; .f insert )
+                 [:a [:!Sgrave_accent_and_tilde :slash] :period-mode] ;; .a insert ~/
+                 [:s [:period :!S8] :period-mode]
+                 [:r :!Sr :period-mode]]}
+        {:des "More Home Row Mod"
+         :rules [[:condi :hrm]
+                 [:a :a  nil {:held [:!Sleft_arrow :keypad_num_lock :!OSleft_command]  :params {:held 99}}]
+                 [:s :s  nil {:held [:!Sleft_arrow :keypad_num_lock :!Oleft_command]  :params {:held 99}}]
+                 [:f :f  nil {:held [:!Sleft_arrow :keypad_num_lock :left_command]  :params {:held 99}}]
+                 [:d :d  nil {:held [:!Sleft_arrow :keypad_num_lock :!Sleft_command]  :params {:held 99}}]
+                 ;;
+                 [:j :j  nil {:held [:!Sleft_arrow :keypad_num_lock :right_command]  :params {:held 99}}]
+                 [:k :k  nil {:held [:!Sleft_arrow :keypad_num_lock :!Sleft_command]  :params {:held 99}}]
+                 [:l :l  nil {:held [:!Sleft_arrow :keypad_num_lock :!Oleft_command]  :params {:held 99}}]
+                 [:semicolon :semicolon  nil {:held [:!Sleft_arrow :keypad_num_lock :!OSleft_command]  :params {:held 99}}]
+                 [:c :c  nil {:held [:!Sleft_arrow :keypad_num_lock :!Tleft_command]  :params {:held 99}}]
+                 [:m :m  nil {:held [:!Sleft_arrow :keypad_num_lock :!Tleft_command]  :params {:held 99}}]
+                 [:x :x  nil {:held [:!Sleft_arrow :keypad_num_lock :!Oleft_shift]  :params {:held 99}}]
+                 [:comma :comma nil {:held [:!Sleft_arrow :keypad_num_lock :!Oleft_shift]  :params {:held 99}}]]}
+        {:des "Less Home Row Mod"
+         :rules [[:a :vk_none nil {:alone :a :held :!Cright_control :params {:held 80}}]
+                 [:s :vk_none nil {:alone :s :held :!Oright_command :params {:held 80}}]
+                 [:d :vk_none nil {:alone :d :held :!Sright_command :params {:held 80}}]
+                 [:f :vk_none nil {:alone :f :held :right_command :params {:held 80}}]
+                 ;;
+                 [:j :vk_none nil {:alone :j :held :left_command :params {:held 80}}]
+                 [:k :vk_none nil {:alone :k :held :!Sleft_command :params {:held 80}}]
+                 [:l :vk_none nil {:alone :l :held :!Oleft_command :params {:held 80}}]
+                 [:semicolon :vk_none nil {:alone :!Ssemicolon :held :!Cleft_control :params {:held 80}}]
+                 [:!Ssemicolon :semicolon]
+                 [:m :vk_none nil {:alone :m :held :!Cleft_control :params {:held 80}}]
+                 [:c :vk_none nil {:alone :c :held :!Cright_control :params {:held 80}}]
+                 [:x :vk_none nil {:alone :x :held :!Oleft_shift :params {:held 80}}]
+                 [:comma :vk_none nil {:alone :comma :held :!Oleft_shift :params {:held 80}}]
+                 ;[: :vk_none nil {:alone : :held :left_command :params {:held 80}}]
+                 ;[: :vk_none nil {:alone : :held :left_command :params {:held 80}}]
+                 ]}
+        {:des "Super Home Row Mode"
+         :rules [;[:#Sf ["f-mode" 1] nil {:afterup ["f-mode" 0] :alone :f}]
+                 ;[:#Sd ["d-mode" 1] nil {:afterup ["d-mode" 0] :alone :d}]
+                 ;[:#Ss ["s-mode" 1] nil {:afterup ["s-mode" 0] :alone :s}]
+                 ;[:a :vk_none nil {:alone :a :held :left_shift :params {:held 80}}]
+                 ;[:r ["r-mode" 1] nil {:afterup ["r-mode" 0] :alone :r}]
+                 ;[:e ["e-mode" 1] nil {:afterup ["e-mode" 0] :alone :e}]
+                 ;[:w ["w-mode" 1] nil {:afterup ["w-mode" 0] :alone :w}]
+                 ;[:a ["a-mode" 1] nil {:afterup ["a-mode" 0] :alone :a}]
+                 ;[:f-mode :d-mode] [:i :!Si]
+                 ;[:!Qi :up_arrow] [:!Qj :left_arrow] [:!Qk :down_arrow] [:!Ql :right_arrow] [:!Qu :delete_or_backspace] [:!Qo :delete_forward]
+                 ;[:i :!SCup_arrow] [:j :!SCleft_arrow] [:k :!SCdown_arrow] [:l :!SCright_arrow] [:u :!SCdelete_or_backspace] [:o :!SCdelete_forward]
+                 ;[:i :!SOup_arrow] [:j :!SOleft_arrow] [:k :!SOdown_arrow] [:l :!SOright_arrow] [:u :!SOdelete_or_backspace] [:o :!SOdelete_forward]
+                 ;[:i :!Sup_arrow] [:j :!Sleft_arrow] [:k :!Sdown_arrow] [:l :!Sright_arrow] [:u :!Sdelete_or_backspace] [:o :!Sdelete_forward]
+                 ;[:i :!Cup_arrow] [:j :!Cleft_arrow] [:k :!Cdown_arrow] [:l :!Cright_arrow] [:u :!Cdelete_or_backspace] [:o :!Cdelete_forward]
+                 ;[:i :!Oup_arrow] [:j :!Oleft_arrow] [:k :!Odown_arrow] [:l :!Oright_arrow] [:u :!Odelete_or_backspace] [:o :!Odelete_forward]
+                 ]}
+        {:des "Super+ Home Row Mode"
+         :rules [[:##a :vk_none nil {:alone :a :held :!Sfn}]
+                 [:##s :vk_none nil {:alone :s :held :!Ofn}]
+                 [:##d :vk_none nil {:alone :d :held :!Cfn}]
+                 [:##f :vk_none nil {:alone :f :held :fn}]
+                 [:!Fj :left_arrow]]}
+        {:des "MISC"
+         :rules [;[[:f :j] :!Sg]
+                 ;[:button2 :a]
+                 [[:d :f] :left_command]
+                 [:escape :!Oescape :safari]
+                 [:!Oescape :escape :safari]
+                 [:!Q#SEbackslash :!Cclose_bracket]
+                 [:!C#SEbackslash :!Cclose_bracket]
+                 [:left_option :left_option nil {:alone [:left_arrow]}]
+                 [:left_command :left_command nil {:alone [:right_arrow]}]
+                 [:fn :fn nil {:alone [:return_or_enter]}]
+                 [:grave_accent_and_tilde :fn nil {:alone :!Sgrave_accent_and_tilde}]
+                 [:!Sgrave_accent_and_tilde :!Sfn nil {:alone :grave_accent_and_tilde}]
+                 [:left_control :left_control nil {:alone [:up_arrow]}]
+                 [:!Qq :!OEq nil {:held [:!Cq :!OEw] :params {:held 300}}]
+                 [:!Cq :!OEq nil {:held [:!Cq :!OEw] :params {:held 300}}]
+                 [:!QWq :!OEq nil {:held [:!Cq :!OEw] :params {:held 300}}]
+                 [:!CSq :!OEq nil {:held [:!Cq :!OEw] :params {:held 300}}]]}]}
+
